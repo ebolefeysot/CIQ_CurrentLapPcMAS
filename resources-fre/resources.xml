@@ -1,0 +1,11 @@
+<resources>
+	<string id="AppName">Vitesse mmoyenne du circuit en % VMA</string>
+	<string id="masTitle">VMA (km/h)</string>
+	<string id="masPrompt">Entrez votre VMA en km/h</string>
+	<string id="masError">VMA incorrecte</string>
+	<settings>
+		<setting propertyKey="@Properties.mas" title="@Strings.masTitle" prompt="@Strings.masPrompt">
+			<settingConfig type="numeric" required="true" errorMessage="@Strings.masError" />
+		</setting>
+	</settings>
+</resources>

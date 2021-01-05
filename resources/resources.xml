@@ -1,0 +1,10 @@
+<resources>
+	<string id="AppName">Lap speed in % MAS</string>
+	<string id="masTitle">MAS (km/h)</string>
+	<string id="masPrompt">Enter your MAS in km/h (= miles/h * 1.61)</string>
+	<string id="masError">Incorrect MAS</string>
+	<properties>
+		<property id="appVersion" type="string">1.0.0</property>
+		<property id="mas" type="float">17.4</property>
+	</properties>
+</resources>
