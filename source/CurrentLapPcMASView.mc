@@ -20,6 +20,7 @@ class CurrentLapPcMASView extends Ui.SimpleDataField {
 	hidden var timerState = STOPPED;
 	hidden var fixedLapTimeOffset;
 	hidden var lapTimeOffset = 3; //3s
+	hidden var fieldLabel = Ui.loadResource(Rez.Strings.FieldName);
 
     //! constructor
     function initialize() {
@@ -36,7 +37,7 @@ class CurrentLapPcMASView extends Ui.SimpleDataField {
 
     function setLabel(){
         //label displayed in top of the field
-        label = "lap %MAS " + mas.format("%.01f");        
+        label = fieldLabel + " " + mas.format("%.01f");        
     }
 
     //! settings have changed.
