@@ -10,7 +10,14 @@ More custom data fields are available on garmin store:
  - Last lap %MAS
 
 ### Setting the MAS/VMA/vVO2max
-Data field type application don't have access to picker widget: you can't set your MAS from the device. The MAS variable is defined as setting (xml files) and can be changed during the installation on the device.
+Data field type application don't have access to picker widget: you can't set your MAS from the device. The MAS variable is defined as setting (xml files) and can be changed on the garmin express software:
+
+How to set your MAS: 
+ - Go to Garmin Express and sync to install the field
+ - Click the 'IQ App' section
+ - Scroll to the field and click then '...' icon
+ - Set your MAS. Use comma as separator.
+ - Go back to main page and sync.
 
 ### Project Setup
 Follow garmin setup for eclipse and Connect IQ plugin: https://developer.garmin.com/connect-iq/sdk/
