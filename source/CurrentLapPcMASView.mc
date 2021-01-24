@@ -10,6 +10,8 @@ class CurrentLapPcMASView extends Ui.SimpleDataField {
     }
 
     var mas = Application.getApp().getProperty("mas");
+    var nbDecimal = Application.getApp().getProperty("nbDecimal");
+    var showPercentChar = Application.getApp().getProperty("showPercentChar");
 
     hidden var lapMas = 0.0; //current lap average speed in % MAS
     hidden var startTime = 0.0; //elapsed time during the 3 second delay
@@ -27,14 +29,34 @@ class CurrentLapPcMASView extends Ui.SimpleDataField {
     	//calculate the time delay in ms before starting calculating average speed
     	fixedLapTimeOffset = lapTimeOffset * 1000 - 500; //precision is delay + 0-1s, I cut in two by removing 500 ms
     	if (fixedLapTimeOffset < 0){
-    		fixedLapTimeOffset = 0;
+    		fixedLapTimeOffset = 0.0;
     	}
     	
         SimpleDataField.initialize();
         setLabel();
-   		lapMas = lapMas.format("%.0f"); // remove decimals
+   		lapMas = formatResult(lapMas); // remove decimals
     }
 
+    function formatResult(value){
+        var result = value;
+ 
+        //if value is a speed value, format it
+        if (result == 0){
+        	result = "...";
+        }
+        else
+        {
+            var format = "%." + nbDecimal + "f";
+            //Sys.println("format: " + format);
+            result = value.format(format);
+        }
+        
+        if (showPercentChar){
+            result += "%";
+        }
+        return result;
+    }
+    
     function setLabel(){
         //label displayed in top of the field
         label = fieldLabel + " " + mas.format("%.01f");        
@@ -99,9 +121,9 @@ class CurrentLapPcMASView extends Ui.SimpleDataField {
 	}
 
    function ResetData() {
-       	lapMas=0;
-        startTime=0;
-        startDist=0;
+       	lapMas=0.0;
+        startTime=0.0;
+        startDist=0.0;
    }		
 
     //! Return the field to display.
@@ -114,12 +136,12 @@ class CurrentLapPcMASView extends Ui.SimpleDataField {
    
  		if (timerState == STOPPED)
  		{
-        	return "...%";
+        	return formatResult(0);
 		}
 
 		if (timerState == PAUSED)
 		{
-        	return lapMas + "%";
+        	return lapMas;
 		}
  	
  		// start a new calculation ?
@@ -130,13 +152,13 @@ class CurrentLapPcMASView extends Ui.SimpleDataField {
  		}
 
         if (info == null || info.currentSpeed == null){
-        	return "...%";
+        	return formatResult(0);
         }
 
     	//wait for the delay
         if ((info.elapsedTime - newLapTime) < fixedLapTimeOffset){
         	//display previous lap speed while waiting
-        	return "...%";
+        	return formatResult(0);
         }
 
         //we calculate now
@@ -145,7 +167,7 @@ class CurrentLapPcMASView extends Ui.SimpleDataField {
             startTime = info.elapsedTime;
             startDist = info.elapsedDistance;
 	 	    //Sys.println("Start calculation : time = " + startTime + ", dist = " + startDist);
-        	return "...%";
+        	return formatResult(0);
         }
 	
     	//calculate average speed, but display previous lap speed
@@ -154,10 +176,10 @@ class CurrentLapPcMASView extends Ui.SimpleDataField {
 				var fixedTimeH = (info.elapsedTime - startTime) / 1000.0 / 3600.0; //time is in ms
                 var averageSpeedKmh = fixedDistKm / fixedTimeH;
 		        lapMas = averageSpeedKmh / mas * 100.0;
-		        lapMas = lapMas.format("%.0f");
+		        lapMas = formatResult(lapMas);
 		        //Sys.println("Time: " + info.elapsedTime + " dist: " + info.elapsedDistance + "  speed: " + info.currentSpeed + "fixed dist km: " + fixedDistKm + " fixed time h: " + fixedTimeH + " calcAvgSpeed: " + averageSpeedKmh+ " %mas: " + lapMas  + " ( " + lapMas + "%" + ")");
 		        
-		        return lapMas + "%";
+		        return lapMas;
 		 }
 		catch( ex ) {
 		    return "Err";
