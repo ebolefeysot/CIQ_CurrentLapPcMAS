@@ -10,7 +10,7 @@ class CurrentLapPcMASView extends Ui.SimpleDataField {
     }
 
     var mas = Application.getApp().getProperty("mas");
-    var nbDecimal = Application.getApp().getProperty("nbDecimal");
+    var showDecimal = Application.getApp().getProperty("showDecimal");
     var showPercentChar = Application.getApp().getProperty("showPercentChar");
 
     hidden var lapMas = 0.0; //current lap average speed in % MAS
@@ -46,7 +46,10 @@ class CurrentLapPcMASView extends Ui.SimpleDataField {
         }
         else
         {
-            var format = "%." + nbDecimal + "f";
+		    var format = "%.0f";
+		    if (showDecimal){
+		    	format = "%.1f";
+		    }
             //Sys.println("format: " + format);
             result = value.format(format);
         }

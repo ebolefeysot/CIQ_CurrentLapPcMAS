@@ -1,4 +1,4 @@
 <strings>
-    <string id="AppName">CurrentLapPcMAS</string>
-    <string id="FieldName">lap %MAS</string>
+	<!-- This string is displayed on watch above the field -->
+    <string id="FieldName">LAP %MAS</string>
 </strings>
