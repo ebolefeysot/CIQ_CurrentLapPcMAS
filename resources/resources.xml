@@ -1,6 +1,6 @@
 <resources>
     <!-- AppName is used as field name in watch. It should be short. -->
-    <string id="AppName">Lap avg %MAS</string>
+    <string id="AppName">Lap average speed in %MAS</string>
 
 	<string id="masTitle">MAS (km/h)</string>
 	<string id="masPrompt">Enter your MAS in km/h (= miles/h * 1.61)</string>
@@ -8,7 +8,7 @@
 
 	<string id="showDecimalTitle">Display %MAS with a decimal (ex: 68.9%)</string>
 
-	<string id="showPercentCharTitle">Display '%' char after speed</string>
+	<string id="showPercentCharTitle">Display '%' char after speed (note that Garmin will use a smaller font)</string>
 	
 	<properties>
 		<property id="mas" type="float">17.4</property>
