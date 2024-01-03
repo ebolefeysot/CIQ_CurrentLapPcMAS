@@ -9,9 +9,9 @@ class CurrentLapPcMASView extends Ui.SimpleDataField {
         RUNNING
     }
 
-    var mas = Application.getApp().getProperty("mas");
-    var showDecimal = Application.getApp().getProperty("showDecimal");
-    var showPercentChar = Application.getApp().getProperty("showPercentChar");
+    var mas = Application.Properties.getValue("mas");
+    var showDecimal = Application.Properties.getValue("showDecimal");
+    var showPercentChar = Application.Properties.getValue("showPercentChar");
 
     hidden var lapMas = 0.0; //current lap average speed in % MAS
     hidden var startTime = 0.0; //elapsed time during the 3 second delay
@@ -67,7 +67,7 @@ class CurrentLapPcMASView extends Ui.SimpleDataField {
 
     //! settings have changed.
     function onSettingsChanged(){
-        mas = Application.getApp().getProperty("mas");
+        mas = Application.Properties.getValue("mas");
         setLabel();
     }
 
